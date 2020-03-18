@@ -21,6 +21,7 @@
     "react-i18next": "^11.3.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
+    "rollbar": "^2.15.0",
     "typescript": "^3.7.5"
   },
   "scripts": {
