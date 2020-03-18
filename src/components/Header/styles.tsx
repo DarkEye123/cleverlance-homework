@@ -26,10 +26,14 @@ const NavBar = styled('nav')({
   flexGrow: 1,
   display: 'flex',
   '& a': {
+    display: 'flex',
+    alignSelf: 'center',
     color: 'white',
   },
-  '& h6': {
+  '& h1': {
     flexGrow: 1,
+    fontSize: '4rem',
+    textTransform: 'uppercase',
   },
 });
 

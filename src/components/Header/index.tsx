@@ -12,21 +12,29 @@ const Header: FC = () => {
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
   };
-  let subjects = useRouteMatch(PAGES.subjects);
-  let pupils = useRouteMatch(PAGES.pupils);
+  const isSubjectsPage = useRouteMatch(PAGES.subjects);
+  const pupils = useRouteMatch(PAGES.pupils);
   const home = useRouteMatch({ exact: true, strict: true, path: PAGES.home });
+  const isPupilPage = pupils || home;
+
+  let title = t('pupils');
+
+  if (isSubjectsPage) {
+    title = t('subjects');
+  }
+
   return (
     <header>
       <AppBar position="sticky">
         <Toolbar>
           <NavBar>
-            <Typography variant="h6">News</Typography>
-            {subjects && (
+            <Typography variant="h1">{title}</Typography>
+            {isSubjectsPage && (
               <Link component={RouterLink} variant="body2" to={PAGES.pupils}>
                 {t('pupils')}
               </Link>
             )}
-            {(pupils || home) && (
+            {isPupilPage && (
               <Link component={RouterLink} variant="body2" to={PAGES.subjects}>
                 {t('subjects')}
               </Link>
@@ -35,12 +43,14 @@ const Header: FC = () => {
           <Lang>
             <LangButton
               active={i18n.language === 'sk'}
+              aria-pressed={i18n.language === 'sk'}
               onClick={() => changeLanguage('sk')}
             >
               sk
             </LangButton>
             <LangButton
               active={i18n.language !== 'sk'}
+              aria-pressed={i18n.language !== 'sk'}
               onClick={() => changeLanguage('en')}
             >
               en
