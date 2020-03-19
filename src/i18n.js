@@ -6,12 +6,14 @@ const resources = {
     translation: {
       pupils: 'pupils',
       subjects: 'subjects',
+      problem: 'problem',
     },
   },
   sk: {
     translation: {
       pupils: 'žiaci',
       subjects: 'predmety',
+      problem: 'problém',
     },
   },
 };
