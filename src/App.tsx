@@ -6,22 +6,23 @@ import { Header } from './components';
 import Routes from './routes';
 import client from './client';
 import { Tracker } from './tracker';
+import { TrackerContext } from './ctx';
 
 function App({ errorTracker }: { errorTracker: Tracker }) {
   const TrackerProvider = React.createContext<Tracker>(errorTracker);
   return (
-    <ApolloProvider client={client}>
-      <NoSsr>
-        <React.StrictMode>
-          <TrackerProvider.Provider value={errorTracker}>
-            <Router>
-              <Header />
-              <Routes />
-            </Router>
-          </TrackerProvider.Provider>
-        </React.StrictMode>
-      </NoSsr>
-    </ApolloProvider>
+    <TrackerContext.Provider value={errorTracker}>
+        <ApolloProvider client={client}>
+          <NoSsr>
+            <React.StrictMode>
+              <Router>
+                <Header />
+                <Routes />
+              </Router>
+            </React.StrictMode>
+          </NoSsr>
+        </ApolloProvider>
+    </TrackerContext.Provider>
   );
 }
 

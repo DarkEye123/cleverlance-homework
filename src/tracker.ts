@@ -3,6 +3,7 @@ import Rollbar from 'rollbar';
 export interface Tracker {
   info: (...args: string[]) => void;
   debug: (...args: string[]) => void;
+  error: (...args: string[]) => void;
 }
 
 const rollbar = new Rollbar({
@@ -11,5 +12,4 @@ const rollbar = new Rollbar({
   captureUnhandledRejections: true,
 });
 
-debugger;
 export default rollbar as Tracker;
