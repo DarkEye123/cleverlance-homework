@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Route } from 'react-router-dom';
-import { Students, Subjects } from './components';
+import { Students, Subjects } from './views';
 
 const PAGES = {
   home: '/',

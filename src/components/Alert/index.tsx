@@ -82,6 +82,7 @@ export default ({ error }: { error: NetworkError | undefined }) => {
       <ErrorAlert
         message={message}
         id={id}
+        // eslint-disable-next-line eqeqeq
         onClose={(id: number) => setErrors(errors.filter(e => e.id != id))}
       />
     </motion.div>
