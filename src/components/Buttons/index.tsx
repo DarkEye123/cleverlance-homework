@@ -8,10 +8,13 @@ const StyledAddButton = styled(IconButton)(({ theme }: { theme: Theme }) => ({
   '& :hover': {
     color: theme.palette.success.light,
   },
+  display: 'flex',
+  flexGrow: 1,
+  width: '100%',
 }));
 
 export const AddButton = ({ ...props }) => (
   <StyledAddButton {...props}>
-    <AddCircleRounded />
+    <AddCircleRounded fontSize="large" />
   </StyledAddButton>
 );
