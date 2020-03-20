@@ -78,7 +78,6 @@ export default ({ error }: { error: NetworkError | undefined }) => {
   );
   let items = errors.map(({ message, id }) => (
     <motion.div positionTransition key={id}>
-      {console.log(error)}
       <ErrorAlert
         message={message}
         id={id}
