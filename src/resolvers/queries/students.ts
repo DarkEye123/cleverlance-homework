@@ -1,6 +1,10 @@
 import { gql } from '@apollo/client';
+import {
+  STUDENTS_QUERY,
+  STUDENTS_QUERY_allStudents,
+} from './__generated__/STUDENTS_QUERY';
 
-const STUDENTS_QUERY = gql`
+const QUERY = gql`
   query STUDENTS_QUERY {
     allStudents {
       id
@@ -11,4 +15,6 @@ const STUDENTS_QUERY = gql`
   }
 `;
 
-export default STUDENTS_QUERY;
+export type STUDENTS_QUERY_TYPEDEF = STUDENTS_QUERY;
+export type STUDENTS_QUERY_allStudents_TYPEDEF = STUDENTS_QUERY_allStudents;
+export default QUERY;

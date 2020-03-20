@@ -9,15 +9,19 @@ import {
 import { useQuery } from '@apollo/client';
 import { STUDENTS_QUERY } from '../../resolvers';
 import { Alert } from '../index';
+import { STUDENTS_QUERY_TYPEDEF } from '../../resolvers';
+import Student from './student';
 
-const Students = () => {
-  const { loading, error, data } = useQuery(STUDENTS_QUERY);
+const Students: React.FC = () => {
+  const { loading, error, data } = useQuery<STUDENTS_QUERY_TYPEDEF>(
+    STUDENTS_QUERY,
+  );
   return (
     <Box component={Container} mt={8}>
       {data && (
         <Grid container direction="column" spacing={1}>
-          {data.allStudents.map((p: any) => (
-            <div>{p.firstName}</div>
+          {data.allStudents?.map(p => (
+            <Student {...p}></Student>
           ))}
         </Grid>
       )}
