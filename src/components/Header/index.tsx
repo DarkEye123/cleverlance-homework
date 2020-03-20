@@ -13,52 +13,50 @@ const Header: FC = () => {
     i18n.changeLanguage(lng);
   };
   const isSubjectsPage = useRouteMatch(PAGES.subjects);
-  const pupils = useRouteMatch(PAGES.pupils);
+  const students = useRouteMatch(PAGES.students);
   const home = useRouteMatch({ exact: true, strict: true, path: PAGES.home });
-  const isPupilPage = pupils || home;
+  const isStudentsPage = students || home;
 
-  let title = t('pupils');
+  let title = t('students');
 
   if (isSubjectsPage) {
     title = t('subjects');
   }
 
   return (
-    <header>
-      <AppBar position="sticky">
-        <Toolbar>
-          <NavBar>
-            <Typography variant="h1">{title}</Typography>
-            {isSubjectsPage && (
-              <Link component={RouterLink} variant="body2" to={PAGES.pupils}>
-                {t('pupils')}
-              </Link>
-            )}
-            {isPupilPage && (
-              <Link component={RouterLink} variant="body2" to={PAGES.subjects}>
-                {t('subjects')}
-              </Link>
-            )}
-          </NavBar>
-          <Lang>
-            <LangButton
-              active={i18n.language === 'sk'}
-              aria-pressed={i18n.language === 'sk'}
-              onClick={() => changeLanguage('sk')}
-            >
-              sk
-            </LangButton>
-            <LangButton
-              active={i18n.language !== 'sk'}
-              aria-pressed={i18n.language !== 'sk'}
-              onClick={() => changeLanguage('en')}
-            >
-              en
-            </LangButton>
-          </Lang>
-        </Toolbar>
-      </AppBar>
-    </header>
+    <AppBar position="sticky">
+      <Toolbar>
+        <NavBar>
+          <Typography variant="h1">{title}</Typography>
+          {isSubjectsPage && (
+            <Link component={RouterLink} variant="body2" to={PAGES.students}>
+              {t('students')}
+            </Link>
+          )}
+          {isStudentsPage && (
+            <Link component={RouterLink} variant="body2" to={PAGES.subjects}>
+              {t('subjects')}
+            </Link>
+          )}
+        </NavBar>
+        <Lang>
+          <LangButton
+            active={i18n.language === 'sk'}
+            aria-pressed={i18n.language === 'sk'}
+            onClick={() => changeLanguage('sk')}
+          >
+            sk
+          </LangButton>
+          <LangButton
+            active={i18n.language !== 'sk'}
+            aria-pressed={i18n.language !== 'sk'}
+            onClick={() => changeLanguage('en')}
+          >
+            en
+          </LangButton>
+        </Lang>
+      </Toolbar>
+    </AppBar>
   );
 };
 

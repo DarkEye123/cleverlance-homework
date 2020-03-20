@@ -4,14 +4,14 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     translation: {
-      pupils: 'pupils',
+      students: 'students',
       subjects: 'subjects',
       problem: 'problem',
     },
   },
   sk: {
     translation: {
-      pupils: 'žiaci',
+      students: 'žiaci',
       subjects: 'predmety',
       problem: 'problém',
     },

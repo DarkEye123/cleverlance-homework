@@ -1,1 +1,1 @@
-export { default as PUPILS_QUERY } from './queries/pupils';
+export { default as STUDENTS_QUERY } from './queries/students';

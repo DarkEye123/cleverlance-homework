@@ -2,7 +2,7 @@
  * Note that in real graphql these relationships would be easier and cleaner for definition.
  */
 module.exports = {
-  pupils: [
+  students: [
     {
       id: 1,
       firstName: 'Beryl',
@@ -20,10 +20,10 @@ module.exports = {
     { id: 1, name: 'Mathematics' },
     { id: 2, name: 'Philosophy' },
   ],
-  pupilSubjects: [
+  studentSubjects: [
     {
       id: 1,
-      pupil_id: 1,
+      student_id: 1,
       subject_id: 1,
     },
   ],

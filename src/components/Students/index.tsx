@@ -1,17 +1,16 @@
 import React from 'react';
 import { Backdrop, CircularProgress, Grid } from '@material-ui/core';
 import { useQuery } from '@apollo/client';
-import { PUPILS_QUERY } from '../../resolvers';
+import { STUDENTS_QUERY } from '../../resolvers';
 import { Alert } from '../index';
 
-const Pupils = () => {
-  const { loading, error, data } = useQuery(PUPILS_QUERY);
-  console.log(data);
+const Students = () => {
+  const { loading, error, data } = useQuery(STUDENTS_QUERY);
   return (
     <>
       {data && (
         <Grid container direction="column" spacing={1}>
-          {data.allPupils.map((p: any) => (
+          {data.allStudents.map((p: any) => (
             <div>{p.firstName}</div>
           ))}
         </Grid>
@@ -24,4 +23,4 @@ const Pupils = () => {
   );
 };
 
-export default Pupils;
+export default Students;
