@@ -7,19 +7,15 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import { Delete as DeleteIcon } from '@material-ui/icons';
-import { Selected } from '../../types';
+import { Selected, DeleteCB } from '../../types';
 
 const Subject: React.FC<{ subject: SubjectGraphQL } & Selected &
-  React.HTMLAttributes<HTMLDivElement> & { onDeleteStudent: () => void }> = ({
-  subject: { id, name },
-  selected,
-  onDeleteStudent,
-  ...rest
-}) => (
+  React.HTMLAttributes<HTMLDivElement> &
+  DeleteCB> = ({ subject: { id, name }, selected, onDelete, ...rest }) => (
   <ListItem button selected={selected === (id as Number)} {...rest}>
     <ListItemText primary={name} />
     <ListItemSecondaryAction>
-      <IconButton edge="end" aria-label="delete" onClick={onDeleteStudent}>
+      <IconButton edge="end" aria-label="delete" onClick={onDelete}>
         <DeleteIcon />
       </IconButton>
     </ListItemSecondaryAction>

@@ -13,6 +13,7 @@ import { TableLayout } from '../layouts';
 import { useTracker } from '../hooks';
 import { useTranslation } from 'react-i18next';
 import { AddButton } from '../components/Buttons';
+import { MotionDiv } from '../components/motion';
 
 const Subjects: React.FC = () => {
   const { loading, error, data } = useQuery<SUBJECTS_QUERY_OUTPUT_SHAPE>(
@@ -20,7 +21,7 @@ const Subjects: React.FC = () => {
   );
 
   const [removeSubject, removeSubjectData] = useMutation<
-    { removeStudent: REMOVE_SUBJECT_MUTATION_OUTPUT_SHAPE },
+    { removeSubject: REMOVE_SUBJECT_MUTATION_OUTPUT_SHAPE },
     { id: Number }
   >(REMOVE_SUBJECT_MUTATION, {
     refetchQueries: [
@@ -30,8 +31,8 @@ const Subjects: React.FC = () => {
     ],
   });
 
-  const [createStudent, createStudentData] = useMutation<
-    { createStudent: { id: string } },
+  const [createSubject, createSubjectData] = useMutation<
+    { createSubject: { id: string } },
     CREATE_SUBJECT_MUTATION_INPUT_SHAPE
   >(CREATE_SUBJECT_MUTATION, {
     variables: {
@@ -50,7 +51,7 @@ const Subjects: React.FC = () => {
   const tracker = useTracker();
   const { t } = useTranslation();
 
-  const handleOnDeleteStudentConfirmRequest = async (id: Number) => {
+  const handleOnDeleteSubjectConfirmRequest = async (id: Number) => {
     setSelected(id);
     setOpenDialog(true);
   };
@@ -60,9 +61,9 @@ const Subjects: React.FC = () => {
     setOpenDialog(false);
   };
 
-  const handleCreateStudent = async () => {
+  const handleCreateSubject = async () => {
     try {
-      await createStudent();
+      await createSubject();
     } catch (e) {
       tracker?.error(e.message);
     }
@@ -87,22 +88,23 @@ const Subjects: React.FC = () => {
       <TableLayout
         data={!!data}
         loading={loading}
-        error={error || removeSubjectData.error || createStudentData.error}
-        ariaLabel="student list"
+        error={error || removeSubjectData.error || createSubjectData.error}
+        ariaLabel="Subject list"
       >
         {data?.subjects?.map(data => (
-          <Subject
-            subject={data}
-            selected={selected}
-            key={data.id}
-            onDoubleClick={() => setSelected(data.id)}
-            onDeleteStudent={() => handleOnDeleteStudentConfirmRequest(data.id)}
-          ></Subject>
+          <MotionDiv key={data.id}>
+            <Subject
+              subject={data}
+              selected={selected}
+              onDoubleClick={() => setSelected(data.id)}
+              onDelete={() => handleOnDeleteSubjectConfirmRequest(data.id)}
+            ></Subject>
+          </MotionDiv>
         ))}
       </TableLayout>
       <AddButton
         aria-label="add subject"
-        onClick={handleCreateStudent}
+        onClick={handleCreateSubject}
       ></AddButton>
       <ConfirmDialog
         open={openModal}

@@ -15,6 +15,7 @@ import { useTracker } from '../hooks';
 import { useTranslation } from 'react-i18next';
 import { AddButton } from '../components/Buttons';
 import { motion } from 'framer-motion';
+import { MotionDiv } from '../components/motion';
 
 const generateAvatarUrl = () =>
   `https://api.adorable.io/avatars/125/${Date.now().toString()}`;
@@ -69,7 +70,6 @@ const Students: React.FC = () => {
   const handleOnDeleteStudentConfirmRequest = async (id: Number) => {
     setSelected(id);
     setOpenDialog(true);
-    console.log('selecting', id);
   };
 
   const handleReject = () => {
@@ -86,12 +86,10 @@ const Students: React.FC = () => {
   };
 
   const handleConfirm = async () => {
-    console.log('mazem', selected);
     try {
       const successs = await removeStudent({
         variables: { id: selected as Number },
       });
-      console.log('success', successs);
       if (successs) {
         setSelected(null);
       }
@@ -110,19 +108,16 @@ const Students: React.FC = () => {
         ariaLabel="student list"
       >
         {data?.students?.map(data => (
-          <motion.div positionTransition key={Number(data.id)}>
+          <MotionDiv key={data.id}>
             <Student
               student={data}
               selected={selected}
               onDoubleClick={() => setSelected(data.id)}
-              onDeleteStudent={() =>
-                handleOnDeleteStudentConfirmRequest(data.id)
-              }
+              onDelete={() => handleOnDeleteStudentConfirmRequest(data.id)}
             ></Student>
-          </motion.div>
+          </MotionDiv>
         ))}
       </TableLayout>
-      {console.log(selected)}
       <AddButton
         aria-label="add student"
         onClick={handleCreateStudent}

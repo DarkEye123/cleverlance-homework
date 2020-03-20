@@ -16,6 +16,10 @@ export interface Selected {
   selected: Number | null;
 }
 
+export interface DeleteCB {
+  onDelete: () => void;
+}
+
 export type NetworkError = {
   networkError?: (ResultShape & Error) | null;
 } & ApolloError;

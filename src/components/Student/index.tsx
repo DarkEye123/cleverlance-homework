@@ -9,13 +9,14 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import { AccountCircle, Delete as DeleteIcon } from '@material-ui/icons';
-import { Selected } from '../../types';
+import { Selected, DeleteCB } from '../../types';
 
 const Student: React.FC<{ student: StudentGraphQL } & Selected &
-  React.HTMLAttributes<HTMLDivElement> & { onDeleteStudent: () => void }> = ({
+  React.HTMLAttributes<HTMLDivElement> &
+  DeleteCB> = ({
   student: { id, firstName, surname, avatar },
   selected,
-  onDeleteStudent,
+  onDelete,
   ...rest
 }) => (
   <ListItem button selected={selected === id} {...rest}>
@@ -26,7 +27,7 @@ const Student: React.FC<{ student: StudentGraphQL } & Selected &
     </ListItemAvatar>
     <ListItemText primary={`${firstName} ${surname}`} />
     <ListItemSecondaryAction>
-      <IconButton edge="end" aria-label="delete" onClick={onDeleteStudent}>
+      <IconButton edge="end" aria-label="delete" onClick={onDelete}>
         <DeleteIcon />
       </IconButton>
     </ListItemSecondaryAction>
