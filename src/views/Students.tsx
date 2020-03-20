@@ -13,9 +13,19 @@ import { TableLayout } from '../layouts';
 import { useTracker } from '../hooks';
 import { useTranslation } from 'react-i18next';
 import { AddButton } from '../components/Buttons';
+import { motion } from 'framer-motion';
 
 const generateAvatarUrl = () =>
   `https://api.adorable.io/avatars/125/${Date.now().toString()}`;
+
+function* IDGenerator() {
+  let id = 3;
+  while (true) {
+    yield ++id;
+  }
+}
+
+const generator = IDGenerator();
 
 const Students: React.FC = () => {
   const { loading, error, data } = useQuery<STUDENTS_QUERY_INPUT_OUTPUT_SHAPE>(
@@ -24,7 +34,7 @@ const Students: React.FC = () => {
 
   const [removeStudent, removeStudentData] = useMutation<
     { removeStudent: REMOVE_STUDENT_MUTATION_OUTPUT_SHAPE },
-    { id: string }
+    { id: Number }
   >(REMOVE_STUDENT_MUTATION, {
     refetchQueries: [
       {
@@ -34,11 +44,11 @@ const Students: React.FC = () => {
   });
 
   const [createStudent, createStudentData] = useMutation<
-    { createStudent: { id: string } },
+    { createStudent: { id: Number } },
     CREATE_STUDENT_MUTATION_INPUT_SHAPE
   >(CREATE_STUDENT_MUTATION, {
     variables: {
-      id: Date.now().toString(),
+      id: generator.next().value as number,
       avatar: generateAvatarUrl(),
       firstName: 'Lukas',
       surname: 'Novotny',
@@ -50,14 +60,15 @@ const Students: React.FC = () => {
     ],
   });
 
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<Number | null>(null);
   const [openModal, setOpenDialog] = useState<boolean>(false);
   const tracker = useTracker();
   const { t } = useTranslation();
 
-  const handleOnDeleteStudentConfirmRequest = async (id: string) => {
+  const handleOnDeleteStudentConfirmRequest = async (id: Number) => {
     setSelected(id);
     setOpenDialog(true);
+    console.log('selecting', id);
   };
 
   const handleReject = () => {
@@ -74,10 +85,12 @@ const Students: React.FC = () => {
   };
 
   const handleConfirm = async () => {
+    console.log('mazem', selected);
     try {
       const successs = await removeStudent({
-        variables: { id: selected as string },
+        variables: { id: selected as Number },
       });
+      console.log('success', successs);
       if (successs) {
         setSelected(null);
       }
@@ -96,15 +109,19 @@ const Students: React.FC = () => {
         ariaLabel="student list"
       >
         {data?.allStudents?.map(data => (
-          <Student
-            {...data}
-            selected={selected}
-            key={data.id}
-            onDoubleClick={() => setSelected(data.id)}
-            onDeleteStudent={() => handleOnDeleteStudentConfirmRequest(data.id)}
-          ></Student>
+          <motion.div positionTransition key={Number(data.id)}>
+            <Student
+              student={data}
+              selected={selected}
+              onDoubleClick={() => setSelected(data.id)}
+              onDeleteStudent={() =>
+                handleOnDeleteStudentConfirmRequest(data.id)
+              }
+            ></Student>
+          </motion.div>
         ))}
       </TableLayout>
+      {console.log(selected)}
       <AddButton
         aria-label="add student"
         onClick={handleCreateStudent}

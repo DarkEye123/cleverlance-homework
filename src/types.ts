@@ -13,7 +13,7 @@ interface ResultShape {
 }
 
 export interface Selected {
-  selected: string | null;
+  selected: Number | null;
 }
 
 export type NetworkError = {

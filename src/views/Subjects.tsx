@@ -21,7 +21,7 @@ const Subjects: React.FC = () => {
 
   const [removeSubject, removeSubjectData] = useMutation<
     { removeStudent: REMOVE_SUBJECT_MUTATION_OUTPUT_SHAPE },
-    { id: string }
+    { id: Number }
   >(REMOVE_SUBJECT_MUTATION, {
     refetchQueries: [
       {
@@ -45,12 +45,12 @@ const Subjects: React.FC = () => {
     ],
   });
 
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<Number | null>(null);
   const [openModal, setOpenDialog] = useState<boolean>(false);
   const tracker = useTracker();
   const { t } = useTranslation();
 
-  const handleOnDeleteStudentConfirmRequest = async (id: string) => {
+  const handleOnDeleteStudentConfirmRequest = async (id: Number) => {
     setSelected(id);
     setOpenDialog(true);
   };
@@ -71,7 +71,7 @@ const Subjects: React.FC = () => {
   const handleConfirm = async () => {
     try {
       const successs = await removeSubject({
-        variables: { id: selected as string },
+        variables: { id: selected as Number },
       });
       if (successs) {
         setSelected(null);
@@ -92,9 +92,9 @@ const Subjects: React.FC = () => {
       >
         {data?.allSubjects?.map(data => (
           <Subject
-            {...data}
+            subject={data}
             selected={selected}
-            key={data.id}
+            key={Number(data.id)}
             onDoubleClick={() => setSelected(data.id)}
             onDeleteStudent={() => handleOnDeleteStudentConfirmRequest(data.id)}
           ></Subject>

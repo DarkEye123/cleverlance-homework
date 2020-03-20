@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export interface Subject {
   __typename: 'Subject';
-  id: string;
+  id: Number;
   name: string;
 }
 

@@ -5,7 +5,7 @@ export interface REMOVE_STUDENT_MUTATION {
 }
 
 export interface REMOVE_STUDENT_MUTATIONVariables {
-  id: string;
+  id: number;
 }
 
 const MUTATION = gql`

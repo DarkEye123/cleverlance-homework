@@ -11,13 +11,9 @@ import {
 import { AccountCircle, Delete as DeleteIcon } from '@material-ui/icons';
 import { Selected } from '../../types';
 
-const Student: React.FC<StudentGraphQL &
-  Selected &
+const Student: React.FC<{ student: StudentGraphQL } & Selected &
   React.HTMLAttributes<HTMLDivElement> & { onDeleteStudent: () => void }> = ({
-  id,
-  firstName,
-  surname,
-  avatar,
+  student: { id, firstName, surname, avatar },
   selected,
   onDeleteStudent,
   ...rest

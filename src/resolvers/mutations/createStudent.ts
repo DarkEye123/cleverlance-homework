@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client';
 
 export interface CREATE_STUDENT_MUTATION {
-  createStudent: { id: string };
+  createStudent: { id: number };
 }
 
 export interface CREATE_STUDENT_MUTATIONVariables {
-  id: string;
+  id: number;
   firstName: string;
   surname: string;
   avatar: string;
