@@ -1,34 +1,25 @@
 import React from 'react';
-import { StudentGraphQL } from '../../resolvers';
+import { SubjectGraphQL } from '../../resolvers';
 import {
   ListItem,
-  ListItemAvatar,
-  Avatar,
   IconButton,
   ListItemSecondaryAction,
   ListItemText,
 } from '@material-ui/core';
-import { AccountCircle, Delete as DeleteIcon } from '@material-ui/icons';
+import { Delete as DeleteIcon } from '@material-ui/icons';
 import { Selected } from '../../types';
 
-const Student: React.FC<StudentGraphQL &
+const Subject: React.FC<SubjectGraphQL &
   Selected &
   React.HTMLAttributes<HTMLDivElement> & { onDeleteStudent: () => void }> = ({
   id,
-  firstName,
-  surname,
-  avatar,
+  name,
   selected,
   onDeleteStudent,
   ...rest
 }) => (
   <ListItem button selected={selected === id} {...rest}>
-    <ListItemAvatar>
-      <Avatar alt={`${firstName} ${surname}`} src={avatar}>
-        <AccountCircle />
-      </Avatar>
-    </ListItemAvatar>
-    <ListItemText primary={`${firstName} ${surname}`} />
+    <ListItemText primary={name} />
     <ListItemSecondaryAction>
       <IconButton edge="end" aria-label="delete" onClick={onDeleteStudent}>
         <DeleteIcon />
@@ -37,4 +28,4 @@ const Student: React.FC<StudentGraphQL &
   </ListItem>
 );
 
-export default Student;
+export default Subject;

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import {
   STUDENTS_QUERY,
-  STUDENTS_QUERY_TYPEDEF,
+  STUDENTS_QUERY_INPUT_OUTPUT_SHAPE,
   REMOVE_STUDENT_MUTATION,
-  REMOVE_STUDENT_MUTATION_TYPEDEF,
+  REMOVE_STUDENT_MUTATION_OUTPUT_SHAPE,
   CREATE_STUDENT_MUTATION,
-  CREATE_STUDENT_MUTATIONVariables_TYPEDEF,
+  CREATE_STUDENT_MUTATION_INPUT_SHAPE,
 } from '../resolvers';
 import { Student, ConfirmDialog } from '../components';
 import { TableLayout } from '../layouts';
@@ -18,12 +18,12 @@ const generateAvatarUrl = () =>
   `https://api.adorable.io/avatars/125/${Date.now().toString()}`;
 
 const Students: React.FC = () => {
-  const { loading, error, data } = useQuery<STUDENTS_QUERY_TYPEDEF>(
+  const { loading, error, data } = useQuery<STUDENTS_QUERY_INPUT_OUTPUT_SHAPE>(
     STUDENTS_QUERY,
   );
 
   const [removeStudent, removeStudentData] = useMutation<
-    { removeStudent: REMOVE_STUDENT_MUTATION_TYPEDEF },
+    { removeStudent: REMOVE_STUDENT_MUTATION_OUTPUT_SHAPE },
     { id: string }
   >(REMOVE_STUDENT_MUTATION, {
     refetchQueries: [
@@ -35,7 +35,7 @@ const Students: React.FC = () => {
 
   const [createStudent, createStudentData] = useMutation<
     { createStudent: { id: string } },
-    CREATE_STUDENT_MUTATIONVariables_TYPEDEF
+    CREATE_STUDENT_MUTATION_INPUT_SHAPE
   >(CREATE_STUDENT_MUTATION, {
     variables: {
       id: Date.now().toString(),
