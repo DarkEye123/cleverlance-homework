@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import {
   SUBJECTS_QUERY,
-  SUBJECTS_QUERY_INPUT_OUTPUT_SHAPE,
+  SUBJECTS_QUERY_OUTPUT_SHAPE,
   REMOVE_SUBJECT_MUTATION,
   REMOVE_SUBJECT_MUTATION_OUTPUT_SHAPE,
   CREATE_SUBJECT_MUTATION,
@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { AddButton } from '../components/Buttons';
 
 const Subjects: React.FC = () => {
-  const { loading, error, data } = useQuery<SUBJECTS_QUERY_INPUT_OUTPUT_SHAPE>(
+  const { loading, error, data } = useQuery<SUBJECTS_QUERY_OUTPUT_SHAPE>(
     SUBJECTS_QUERY,
   );
 

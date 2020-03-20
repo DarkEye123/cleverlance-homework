@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import {
   STUDENTS_QUERY,
-  STUDENTS_QUERY_INPUT_OUTPUT_SHAPE,
+  STUDENTS_QUERY_OUTPUT_SHAPE,
   REMOVE_STUDENT_MUTATION,
   REMOVE_STUDENT_MUTATION_OUTPUT_SHAPE,
   CREATE_STUDENT_MUTATION,
@@ -28,7 +28,7 @@ function* IDGenerator() {
 const generator = IDGenerator();
 
 const Students: React.FC = () => {
-  const { loading, error, data } = useQuery<STUDENTS_QUERY_INPUT_OUTPUT_SHAPE>(
+  const { loading, error, data } = useQuery<STUDENTS_QUERY_OUTPUT_SHAPE>(
     STUDENTS_QUERY,
   );
 

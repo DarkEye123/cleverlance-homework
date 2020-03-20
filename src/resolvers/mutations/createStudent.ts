@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export interface CREATE_STUDENT_MUTATION {
-  createStudent: { id: number };
+  insert_students: { affected_rows: number };
 }
 
 export interface CREATE_STUDENT_MUTATIONVariables {
@@ -18,13 +18,15 @@ const MUTATION = gql`
     $surname: String!
     $avatar: String!
   ) {
-    createStudent(
-      id: $id
-      firstName: $firstName
-      surname: $surname
-      avatar: $avatar
+    insert_students(
+      objects: {
+        id: $id
+        firstName: $firstName
+        surname: $surname
+        avatar: $avatar
+      }
     ) {
-      id
+      affected_rows
     }
   }
 `;

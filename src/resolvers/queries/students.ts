@@ -1,20 +1,19 @@
 import { gql } from '@apollo/client';
 
 export interface Student {
-  __typename: 'Student';
-  id: Number;
+  __typename: 'students';
   firstName: string;
   surname: string;
   avatar: string;
 }
 
-export interface STUDENTS_QUERY {
-  allStudents: Student[] | null;
+export interface STUDENTS_QUERY_OUTPUT {
+  students: Student[] | null;
 }
 
 const QUERY = gql`
   query STUDENTS_QUERY {
-    allStudents {
+    students {
       id
       firstName
       surname
