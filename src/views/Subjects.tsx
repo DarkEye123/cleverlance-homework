@@ -90,11 +90,11 @@ const Subjects: React.FC = () => {
         error={error || removeSubjectData.error || createStudentData.error}
         ariaLabel="student list"
       >
-        {data?.allSubjects?.map(data => (
+        {data?.subjects?.map(data => (
           <Subject
             subject={data}
             selected={selected}
-            key={Number(data.id)}
+            key={data.id}
             onDoubleClick={() => setSelected(data.id)}
             onDeleteStudent={() => handleOnDeleteStudentConfirmRequest(data.id)}
           ></Subject>

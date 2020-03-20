@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export interface CREATE_SUBJECT_MUTATION {
-  createSubject: { id: string };
+  insert_subjects: { affected_rows: number };
 }
 
 export interface CREATE_SUBJECT_MUTATIONVariables {
@@ -10,9 +10,9 @@ export interface CREATE_SUBJECT_MUTATIONVariables {
 }
 
 const MUTATION = gql`
-  mutation CREATE_SUBJECT_MUTATION($id: ID!, $name: String!) {
-    createSubject(id: $id, name: $name) {
-      id
+  mutation CREATE_SUBJECT_MUTATION($id: numeric!, $name: String!) {
+    insert_subjects(objects: { id: $id, name: $name }) {
+      affected_rows
     }
   }
 `;

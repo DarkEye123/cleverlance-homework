@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-export interface REMOVE_STUDENT_MUTATION {
-  removeStudent: boolean | null;
+export interface REMOVE_STUDENT_MUTATION_OUTPUT {
+  delete_students: { affected_rows: number };
 }
 
 export interface REMOVE_STUDENT_MUTATIONVariables {
@@ -9,8 +9,10 @@ export interface REMOVE_STUDENT_MUTATIONVariables {
 }
 
 const MUTATION = gql`
-  mutation REMOVE_STUDENT_MUTATION($id: ID!) {
-    removeStudent(id: $id)
+  mutation REMOVE_STUDENT_MUTATION($id: numeric!) {
+    delete_students(where: { id: { _eq: $id } }) {
+      affected_rows
+    }
   }
 `;
 

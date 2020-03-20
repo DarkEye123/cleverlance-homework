@@ -7,6 +7,7 @@ import {
   REMOVE_STUDENT_MUTATION_OUTPUT_SHAPE,
   CREATE_STUDENT_MUTATION,
   CREATE_STUDENT_MUTATION_INPUT_SHAPE,
+  CREATE_STUDENT_MUTATION_OUTPUT_SHAPE,
 } from '../resolvers';
 import { Student, ConfirmDialog } from '../components';
 import { TableLayout } from '../layouts';
@@ -33,7 +34,7 @@ const Students: React.FC = () => {
   );
 
   const [removeStudent, removeStudentData] = useMutation<
-    { removeStudent: REMOVE_STUDENT_MUTATION_OUTPUT_SHAPE },
+    REMOVE_STUDENT_MUTATION_OUTPUT_SHAPE,
     { id: Number }
   >(REMOVE_STUDENT_MUTATION, {
     refetchQueries: [
@@ -44,7 +45,7 @@ const Students: React.FC = () => {
   });
 
   const [createStudent, createStudentData] = useMutation<
-    { createStudent: { id: Number } },
+    CREATE_STUDENT_MUTATION_OUTPUT_SHAPE,
     CREATE_STUDENT_MUTATION_INPUT_SHAPE
   >(CREATE_STUDENT_MUTATION, {
     variables: {
@@ -108,7 +109,7 @@ const Students: React.FC = () => {
         error={error || removeStudentData.error || createStudentData.error}
         ariaLabel="student list"
       >
-        {data?.allStudents?.map(data => (
+        {data?.students?.map(data => (
           <motion.div positionTransition key={Number(data.id)}>
             <Student
               student={data}

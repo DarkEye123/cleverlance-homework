@@ -1,16 +1,18 @@
 import { gql } from '@apollo/client';
 
-export interface REMOVE_SUBJECT_MUTATION {
-  removeSubject: boolean | null;
+export interface REMOVE_SUBJECT_MUTATION_OUTPUT {
+  delete_subjects: { affected_rows: number };
 }
 
 export interface REMOVE_SUBJECT_MUTATIONVariables {
-  id: string;
+  id: number;
 }
 
 const MUTATION = gql`
-  mutation REMOVE_SUBJECT_MUTATION($id: ID!) {
-    removeSubject(id: $id)
+  mutation REMOVE_SUBJECT_MUTATION($id: numeric!) {
+    delete_subjects(where: { id: { _eq: $id } }) {
+      affected_rows
+    }
   }
 `;
 

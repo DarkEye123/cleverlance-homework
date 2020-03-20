@@ -2,6 +2,7 @@ import { gql } from '@apollo/client';
 
 export interface Student {
   __typename: 'students';
+  id: number;
   firstName: string;
   surname: string;
   avatar: string;
