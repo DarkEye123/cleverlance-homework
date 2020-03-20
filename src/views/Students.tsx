@@ -6,16 +6,9 @@ import {
   REMOVE_STUDENT_MUTATION,
   REMOVE_STUDENT_MUTATION_TYPEDEF,
 } from '../resolvers';
-import { Student } from '../components';
+import { Student, ConfirmDialog } from '../components';
 import { TableLayout } from '../layouts';
 import { useTracker } from '../hooks';
-import {
-  Backdrop,
-  Dialog,
-  DialogTitle,
-  DialogActions,
-  Button,
-} from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
 const Students: React.FC = () => {
@@ -74,29 +67,12 @@ const Students: React.FC = () => {
           ></Student>
         ))}
       </TableLayout>
-      <Dialog
-        aria-labelledby="modal-title"
+      <ConfirmDialog
         open={openModal}
-        onClose={() => {
-          setSelected(null);
-          setOpenDialog(false);
-        }}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <DialogTitle id="modal-title">{t('confirmStudentRemoval')}</DialogTitle>
-        <DialogActions>
-          <Button onClick={handleReject} color="secondary">
-            {t('disagree')}
-          </Button>
-          <Button onClick={handleConfirm} color="primary">
-            {t('agree')}
-          </Button>
-        </DialogActions>
-      </Dialog>
+        onClose={handleReject}
+        onConfirm={handleConfirm}
+        title={t('confirmStudentRemoval')}
+      />
     </>
   );
 };
