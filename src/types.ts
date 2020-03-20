@@ -12,6 +12,10 @@ interface ResultShape {
   };
 }
 
+export interface Selected {
+  selected: string | null;
+}
+
 export type NetworkError = {
   networkError?: (ResultShape & Error) | null;
 } & ApolloError;
