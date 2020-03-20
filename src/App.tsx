@@ -6,12 +6,13 @@ import { Header } from './components';
 import Routes from './routes';
 import client from './client';
 import { Tracker } from './tracker';
+import { ErrorBoundary } from './components';
 import { TrackerContext } from './ctx';
 
 function App({ errorTracker }: { errorTracker: Tracker }) {
-  const TrackerProvider = React.createContext<Tracker>(errorTracker);
   return (
     <TrackerContext.Provider value={errorTracker}>
+      <ErrorBoundary>
         <ApolloProvider client={client}>
           <NoSsr>
             <React.StrictMode>
@@ -22,6 +23,7 @@ function App({ errorTracker }: { errorTracker: Tracker }) {
             </React.StrictMode>
           </NoSsr>
         </ApolloProvider>
+      </ErrorBoundary>
     </TrackerContext.Provider>
   );
 }
