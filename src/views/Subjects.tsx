@@ -37,7 +37,7 @@ const Subjects: React.FC = () => {
   >(CREATE_SUBJECT_MUTATION, {
     variables: {
       id: Date.now().toString(),
-      name: 'Sport',
+      name: `Random Subject${Date.now()}`,
     },
     refetchQueries: [
       {

@@ -14,20 +14,10 @@ import { TableLayout } from '../layouts';
 import { useTracker } from '../hooks';
 import { useTranslation } from 'react-i18next';
 import { AddButton } from '../components/Buttons';
-import { motion } from 'framer-motion';
 import { MotionDiv } from '../components/motion';
 
 const generateAvatarUrl = () =>
   `https://api.adorable.io/avatars/125/${Date.now().toString()}`;
-
-function* IDGenerator() {
-  let id = 3;
-  while (true) {
-    yield ++id;
-  }
-}
-
-const generator = IDGenerator();
 
 const Students: React.FC = () => {
   const { loading, error, data } = useQuery<STUDENTS_QUERY_OUTPUT_SHAPE>(
@@ -50,10 +40,10 @@ const Students: React.FC = () => {
     CREATE_STUDENT_MUTATION_INPUT_SHAPE
   >(CREATE_STUDENT_MUTATION, {
     variables: {
-      id: generator.next().value as number,
+      id: Date.now(),
       avatar: generateAvatarUrl(),
-      firstName: 'Lukas',
-      surname: 'Novotny',
+      firstName: 'Test',
+      surname: `Student${Date.now()}`,
     },
     refetchQueries: [
       {
