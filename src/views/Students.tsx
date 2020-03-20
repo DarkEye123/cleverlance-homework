@@ -5,20 +5,50 @@ import {
   STUDENTS_QUERY_TYPEDEF,
   REMOVE_STUDENT_MUTATION,
   REMOVE_STUDENT_MUTATION_TYPEDEF,
+  CREATE_STUDENT_MUTATION,
+  CREATE_STUDENT_MUTATIONVariables_TYPEDEF,
 } from '../resolvers';
 import { Student, ConfirmDialog } from '../components';
 import { TableLayout } from '../layouts';
 import { useTracker } from '../hooks';
 import { useTranslation } from 'react-i18next';
+import { AddButton } from '../components/Buttons';
+
+const generateAvatarUrl = () =>
+  `https://api.adorable.io/avatars/125/${Date.now().toString()}`;
 
 const Students: React.FC = () => {
   const { loading, error, data } = useQuery<STUDENTS_QUERY_TYPEDEF>(
     STUDENTS_QUERY,
   );
+
   const [removeStudent, removeStudentData] = useMutation<
     { removeStudent: REMOVE_STUDENT_MUTATION_TYPEDEF },
     { id: string }
-  >(REMOVE_STUDENT_MUTATION);
+  >(REMOVE_STUDENT_MUTATION, {
+    refetchQueries: [
+      {
+        query: STUDENTS_QUERY,
+      },
+    ],
+  });
+
+  const [createStudent, createStudentData] = useMutation<
+    { createStudent: { id: string } },
+    CREATE_STUDENT_MUTATIONVariables_TYPEDEF
+  >(CREATE_STUDENT_MUTATION, {
+    variables: {
+      id: Date.now().toString(),
+      avatar: generateAvatarUrl(),
+      firstName: 'Lukas',
+      surname: 'Novotny',
+    },
+    refetchQueries: [
+      {
+        query: STUDENTS_QUERY,
+      },
+    ],
+  });
 
   const [selected, setSelected] = useState<string | null>(null);
   const [openModal, setOpenDialog] = useState<boolean>(false);
@@ -33,6 +63,14 @@ const Students: React.FC = () => {
   const handleReject = () => {
     setSelected(null);
     setOpenDialog(false);
+  };
+
+  const handleCreateStudent = async () => {
+    try {
+      await createStudent();
+    } catch (e) {
+      tracker?.error(e.message);
+    }
   };
 
   const handleConfirm = async () => {
@@ -54,7 +92,7 @@ const Students: React.FC = () => {
       <TableLayout
         data={!!data}
         loading={loading}
-        error={error || removeStudentData.error}
+        error={error || removeStudentData.error || createStudentData.error}
         ariaLabel="student list"
       >
         {data?.allStudents?.map(data => (
@@ -67,6 +105,10 @@ const Students: React.FC = () => {
           ></Student>
         ))}
       </TableLayout>
+      <AddButton
+        aria-label="add student"
+        onClick={handleCreateStudent}
+      ></AddButton>
       <ConfirmDialog
         open={openModal}
         onClose={handleReject}

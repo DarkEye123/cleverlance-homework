@@ -24,11 +24,11 @@ const Student: React.FC<STUDENTS_QUERY_allStudents_TYPEDEF &
 }) => (
   <ListItem button selected={selected === id} {...rest}>
     <ListItemAvatar>
-      <Avatar>
+      <Avatar alt={`${firstName} ${surname}`} src={avatar}>
         <AccountCircle />
       </Avatar>
     </ListItemAvatar>
-    <ListItemText primary="Single-line item" />
+    <ListItemText primary={`${firstName} ${surname}`} />
     <ListItemSecondaryAction>
       <IconButton edge="end" aria-label="delete" onClick={onDeleteStudent}>
         <DeleteIcon />
