@@ -10,6 +10,7 @@ const resources = {
       disagree: 'Disagree',
       agree: 'Agree',
       confirmStudentRemoval: 'Do you want to remove this student?',
+      confirmSubjectRemoval: 'Do you want to remove this subject?',
     },
   },
   sk: {
@@ -20,6 +21,7 @@ const resources = {
       disagree: 'Nesúhlasím',
       agree: 'Súhlasím',
       confirmStudentRemoval: 'Chcete zmazať tohto študenta?',
+      confirmSubjectRemoval: 'Chcete zmazať tento predmet?',
     },
   },
 };
