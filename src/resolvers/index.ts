@@ -10,6 +10,7 @@ import { CREATE_SUBJECT_MUTATIONVariables } from './mutations/createSubject';
 
 export { default as STUDENTS_QUERY } from './queries/students';
 export { default as SUBJECTS_QUERY } from './queries/subjects';
+export { default as BOOK_QUERY } from './queries/book';
 export { default as REMOVE_STUDENT_MUTATION } from './mutations/removeStudent';
 export { default as REMOVE_SUBJECT_MUTATION } from './mutations/removeSubject';
 export { default as CREATE_STUDENT_MUTATION } from './mutations/createStudent';

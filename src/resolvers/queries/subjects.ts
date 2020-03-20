@@ -1,7 +1,6 @@
 import { gql } from '@apollo/client';
 
 export interface Subject {
-  __typename: 'subjects';
   id: number;
   name: string;
 }

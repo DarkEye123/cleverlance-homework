@@ -10,14 +10,14 @@ import {
 import { Alert } from '../../components';
 import { NetworkError } from '../../types';
 
-interface TableLayout {
+interface LayoutProps {
   loading: boolean;
   error: NetworkError | undefined;
   data: boolean;
   ariaLabel: string;
 }
 
-const Layout: React.FC<TableLayout> = ({
+const Layout: React.FC<LayoutProps> = ({
   loading,
   error,
   data,

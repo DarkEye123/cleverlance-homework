@@ -1,11 +1,12 @@
 import { gql } from '@apollo/client';
+import { Subject } from './subjects';
 
 export interface Student {
-  __typename: 'students';
   id: number;
   firstName: string;
   surname: string;
   avatar: string;
+  subjects: Subject[] | [];
 }
 
 export interface STUDENTS_QUERY_OUTPUT {
