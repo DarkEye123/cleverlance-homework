@@ -22,6 +22,7 @@ const resources = {
       disagree: 'Nesúhlasím',
       agree: 'Súhlasím',
       confirmStudentRemoval: 'Chcete zmazať tohto študenta?',
+      confirmSubjectRemoval: 'Chcete zmazať tento predmet?',
       userNotFound: 'Užívateľ nebol nájdený :(',
     },
   },
