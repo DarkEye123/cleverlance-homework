@@ -15,6 +15,7 @@ import { useTracker } from '../hooks';
 import { useTranslation } from 'react-i18next';
 import { AddButton } from '../components/Buttons';
 import { MotionDiv } from '../components/motion';
+import { useHistory } from 'react-router-dom';
 
 const generateAvatarUrl = () =>
   `https://api.adorable.io/avatars/125/${Date.now().toString()}`;
@@ -56,6 +57,7 @@ const Students: React.FC = () => {
   const [openModal, setOpenDialog] = useState<boolean>(false);
   const tracker = useTracker();
   const { t } = useTranslation();
+  const history = useHistory();
 
   const handleOnDeleteStudentConfirmRequest = async (id: Number) => {
     setSelected(id);
@@ -102,7 +104,9 @@ const Students: React.FC = () => {
             <Student
               student={data}
               selected={selected}
-              onDoubleClick={() => setSelected(data.id)}
+              onDoubleClick={() => {
+                history.push(`/book/${data.id}`);
+              }}
               onDelete={() => handleOnDeleteStudentConfirmRequest(data.id)}
             ></Student>
           </MotionDiv>
