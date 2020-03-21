@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery, ApolloError } from '@apollo/client';
 import { BOOK_QUERY, BOOK_QUERY_OUTPUT_SHAPE } from '../resolvers';
 import { Backdrop, CircularProgress } from '@material-ui/core';
-import { Alert } from '../components';
+import { Alert, BookEntry } from '../components';
 import { useTranslation } from 'react-i18next';
 import { MotionDiv } from '../components/motion';
 
@@ -50,8 +50,7 @@ const BookView: React.FC = () => {
       >
         {student.book.map(bookEntry => (
           <MotionDiv key={bookEntry.id}>
-            <div>{JSON.parse(bookEntry.scores as any)}</div>
-            <div>{bookEntry.subject.name}</div>
+            <BookEntry bookEntry={bookEntry} selected={0}></BookEntry>
           </MotionDiv>
         ))}
       </BookLayout>

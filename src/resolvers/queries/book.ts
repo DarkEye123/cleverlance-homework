@@ -11,6 +11,7 @@ const QUERY = gql`
       surname
       avatar
       book {
+        id
         subject {
           id
           name

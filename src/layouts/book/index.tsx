@@ -49,7 +49,7 @@ const Layout: React.FC<Omit<StudentGraphQL, 'id'>> = ({
       </Box>
       <Box component={Paper} mt={4} p={4}>
         <Grid container spacing={8}>
-          <Grid item>
+          <Grid item xs={12}>
             <List aria-label="list of subjects">{children}</List>
           </Grid>
         </Grid>
