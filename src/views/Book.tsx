@@ -1,21 +1,25 @@
 import * as React from 'react';
 import { BookLayout } from '../layouts';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { BOOK_QUERY, StudentGraphQL, SubjectGraphQL } from '../resolvers';
+import { useQuery, ApolloError } from '@apollo/client';
+import { BOOK_QUERY, BOOK_QUERY_OUTPUT_SHAPE } from '../resolvers';
 import { Backdrop, CircularProgress } from '@material-ui/core';
 import { Alert } from '../components';
+import { useTranslation } from 'react-i18next';
+import { MotionDiv } from '../components/motion';
 
 const BookView: React.FC = () => {
   let { id } = useParams();
   const { loading, error, data } = useQuery<
-    StudentGraphQL & { subjects: SubjectGraphQL[] },
+    BOOK_QUERY_OUTPUT_SHAPE,
     { id: number }
   >(BOOK_QUERY, {
     variables: {
       id: Number(id),
     },
   });
+
+  const { t } = useTranslation();
   if (loading) {
     return (
       <Backdrop open={loading}>
@@ -23,14 +27,34 @@ const BookView: React.FC = () => {
       </Backdrop>
     );
   }
+
+  if (
+    (!loading && error && !Array.isArray(data?.students)) ||
+    data?.students.length === 0
+  ) {
+    return (
+      <Alert
+        error={error || ({ message: t('userNotFound') } as ApolloError)}
+      ></Alert>
+    );
+  }
+
+  const [student] = data!.students;
+
   return (
     <>
       <BookLayout
-        avatar={data!.avatar}
-        subjects={data!.subjects}
-        firstName={data!.firstName}
-        surname={data!.surname}
-      ></BookLayout>
+        avatar={student.avatar}
+        firstName={student.firstName}
+        surname={student.surname}
+      >
+        {student.book.map(bookEntry => (
+          <MotionDiv key={bookEntry.id}>
+            <div>{JSON.parse(bookEntry.scores as any)}</div>
+            <div>{bookEntry.subject.name}</div>
+          </MotionDiv>
+        ))}
+      </BookLayout>
       <Alert error={error}></Alert>
     </>
   );

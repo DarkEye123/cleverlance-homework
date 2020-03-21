@@ -6,10 +6,11 @@ import {
   Grid,
   Avatar,
   Typography,
+  List,
 } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { AccountCircle } from '@material-ui/icons';
-import { StudentGraphQL, SubjectGraphQL } from '../../resolvers';
+import { StudentGraphQL } from '../../resolvers';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -20,15 +21,19 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-const Layout: React.FC<Omit<StudentGraphQL, 'id' | '__typename'> & {
-  subjects: SubjectGraphQL[] | [] | undefined;
-}> = ({ firstName, surname, avatar, subjects }) => {
+const Layout: React.FC<Omit<StudentGraphQL, 'id'>> = ({
+  firstName,
+  surname,
+  avatar,
+  children,
+}) => {
   const classes = useStyles();
+  // const theme = useTheme();
   return (
     <Box component={Container} mt={8} p={4} maxWidth="65%">
       <Box component={Paper} p={4}>
         <Grid justify="flex-start" alignItems="center" container spacing={8}>
-          <Grid xs={3} item>
+          <Grid xs={12} sm={6} md={4} item>
             <Avatar
               alt={`${firstName} ${surname}`}
               className={classes.large}
@@ -39,6 +44,13 @@ const Layout: React.FC<Omit<StudentGraphQL, 'id' | '__typename'> & {
           </Grid>
           <Grid item>
             <Typography variant="h4">{`${firstName} ${surname}`}</Typography>
+          </Grid>
+        </Grid>
+      </Box>
+      <Box component={Paper} mt={4} p={4}>
+        <Grid container spacing={8}>
+          <Grid item>
+            <List aria-label="list of subjects">{children}</List>
           </Grid>
         </Grid>
       </Box>

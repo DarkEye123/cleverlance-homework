@@ -11,6 +11,7 @@ const resources = {
       agree: 'Agree',
       confirmStudentRemoval: 'Do you want to remove this student?',
       confirmSubjectRemoval: 'Do you want to remove this subject?',
+      userNotFound: 'User was not found :(',
     },
   },
   sk: {
@@ -21,7 +22,7 @@ const resources = {
       disagree: 'Nesúhlasím',
       agree: 'Súhlasím',
       confirmStudentRemoval: 'Chcete zmazať tohto študenta?',
-      confirmSubjectRemoval: 'Chcete zmazať tento predmet?',
+      userNotFound: 'Užívateľ nebol nájdený :(',
     },
   },
 };
