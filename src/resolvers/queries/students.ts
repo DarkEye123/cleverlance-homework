@@ -1,16 +1,7 @@
 import { gql } from '@apollo/client';
-import { Subject } from './subjects';
-
-export interface Student {
-  id: number;
-  firstName: string;
-  surname: string;
-  avatar: string;
-  subjects: Subject[] | [];
-}
-
+import { Student } from '../types';
 export interface STUDENTS_QUERY_OUTPUT {
-  students: Student[] | null;
+  students: Student[];
 }
 
 const QUERY = gql`

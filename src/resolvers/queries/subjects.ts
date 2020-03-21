@@ -1,12 +1,8 @@
 import { gql } from '@apollo/client';
-
-export interface Subject {
-  id: number;
-  name: string;
-}
+import { Subject } from '../types';
 
 export interface SUBJECTS_QUERY_OUTPUT {
-  subjects: Subject[] | null;
+  subjects: Subject[];
 }
 
 const QUERY = gql`

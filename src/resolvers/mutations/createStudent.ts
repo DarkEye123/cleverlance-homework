@@ -4,13 +4,6 @@ export interface CREATE_STUDENT_MUTATION_OUTPUT {
   insert_students: { affected_rows: number };
 }
 
-export interface CREATE_STUDENT_MUTATIONVariables {
-  id: number;
-  firstName: string;
-  surname: string;
-  avatar: string;
-}
-
 const MUTATION = gql`
   mutation CREATE_STUDENT_MUTATION(
     $id: numeric!

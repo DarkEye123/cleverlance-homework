@@ -1,4 +1,8 @@
 import { gql } from '@apollo/client';
+import { BookEntry, Student } from '../types';
+export interface BOOK_QUERY_OUTPUT {
+  students: (Student & { book: BookEntry[] })[];
+}
 
 const QUERY = gql`
   query BOOK_QUERY($id: numeric) {
@@ -6,9 +10,12 @@ const QUERY = gql`
       firstName
       surname
       avatar
-      subjects {
-        id
-        name
+      book {
+        subject {
+          id
+          name
+        }
+        scores
       }
     }
   }

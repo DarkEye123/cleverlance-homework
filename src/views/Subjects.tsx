@@ -36,7 +36,7 @@ const Subjects: React.FC = () => {
     CREATE_SUBJECT_MUTATION_INPUT_SHAPE
   >(CREATE_SUBJECT_MUTATION, {
     variables: {
-      id: Date.now().toString(),
+      id: Date.now(),
       name: `Random Subject${Date.now()}`,
     },
     refetchQueries: [
